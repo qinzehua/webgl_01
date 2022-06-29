@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>渐变三角形</title>
+    <link rel="stylesheet" href="../css/common.css" />
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script type="shader-source" id="vertexShader">
+      precision mediump float;
+      attribute vec2 a_Position;
+      attribute vec2 a_Screen_Size;
+      attribute vec4 a_Color; // 顶点颜色
+      varying vec4 v_Color; // 传往片元着色器的颜色
+
+      void main(){
+        vec2 position = (a_Position / a_Screen_Size) * 2.0 - 1.0;
+        position = position * vec2(1.0,-1.0);
+        gl_Position = vec4(position, 0, 1);
+        v_Color = a_Color;
+      }
+    </script>
+    <script type="shader-source" id="fragmentShader">
+      precision mediump float;
+      varying vec4 v_Color;
+
+      void main(){
+        vec4 color = v_Color / vec4(255, 255, 255, 1);
+        gl_FragColor = color;
+      }
+    </script>
+    <script src="../utils/webgl-helper.js"></script>
+    <script>
+      let canvas = getCanvas("#canvas");
+      resizeCanvas(canvas);
+      let gl = getContext(canvas);
+      let vertexShader = createShaderFromScript(
+        gl,
+        gl.VERTEX_SHADER,
+        "vertexShader"
+      );
+      let fragmentShader = createShaderFromScript(
+        gl,
+        gl.FRAGMENT_SHADER,
+        "fragmentShader"
+      );
+      let program = createSimpleProgram(gl, vertexShader, fragmentShader);
+      gl.useProgram(program);
+
+      let a_Screen_Size = gl.getAttribLocation(program, "a_Screen_Size");
+      gl.vertexAttrib2f(a_Screen_Size, canvas.width, canvas.height);
+
+      let a_Position = gl.getAttribLocation(program, "a_Position");
+      let a_Color = gl.getAttribLocation(program, "a_Color");
+
+      let positions = [];
+      gl.enableVertexAttribArray(a_Position);
+      gl.enableVertexAttribArray(a_Color);
+
+      let buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 24, 0);
+      gl.vertexAttribPointer(a_Color, 4, gl.FLOAT, false, 24, 8);
+
+      gl.clearColor(0, 0, 0, 1);
+      canvas.addEventListener("click", (e) => {
+        positions.push(e.pageX, e.pageY);
+        let color = randomColor();
+        positions.push(color.r, color.g, color.b, color.a);
+        gl.bufferData(
+          gl.ARRAY_BUFFER,
+          new Float32Array(positions),
+          gl.STATIC_DRAW
+        );
+        render(gl);
+      });
+      function render(gl) {
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        let primitiveType = gl.TRIANGLE_STRIP;
+        if (positions.length > 0) {
+          gl.drawArrays(primitiveType, 0, positions.length / 6);
+        }
+      }
+      render(gl);
+    </script>
+  </body>
+</html>
