@@ -54,49 +54,33 @@
       let a_Position = gl.getAttribLocation(program, "a_Position");
       let a_Color = gl.getAttribLocation(program, "a_Color");
 
-      let positions = [];
-      let colors = [];
+      // prettier-ignore
+      var positions = [
+        30, 300, 255, 0, 0, 1,   //V0  
+        300, 300, 255, 0, 0, 1,  //V1
+        30, 30, 255, 0, 0, 1,    //V2
+        350, 230, 0, 255, 0, 1    //V3
+      ];
 
-      var positionBuffer = createBuffer(gl, a_Position, {
-        size: 2, //每次读取顶点(x,y)两个值
-      });
+      gl.enableVertexAttribArray(a_Position);
+      gl.enableVertexAttribArray(a_Color);
 
-      var colorBuffer = createBuffer(gl, a_Color, {
-        size: 4, //每次读取颜色(r,g,b,a)四个值
-      });
+      let buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 24, 0);
+      gl.vertexAttribPointer(a_Color, 4, gl.FLOAT, false, 24, 8);
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array(positions),
+        gl.STATIC_DRAW
+      );
 
       gl.clearColor(0, 0, 0, 1);
-      canvas.addEventListener("click", (e) => {
-        positions.push(e.pageX, e.pageY);
-        let color = randomColor();
-        colors.push(color.r, color.g, color.b, color.a);
-        // 顶点信息为6个数据即3个顶点时执行绘制操作，因为三角形由三个顶点组成。
-        if (positions.length % 6 == 0) {
-          //复制坐标信息到缓冲区中
-          gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-          gl.bufferData(
-            gl.ARRAY_BUFFER,
-            new Float32Array(positions),
-            gl.STATIC_DRAW
-          );
-          //复制颜色信息到缓冲区中。
-          gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
-          gl.bufferData(
-            gl.ARRAY_BUFFER,
-            new Float32Array(colors),
-            gl.STATIC_DRAW
-          );
-          //重绘
-          render(gl);
-        }
-      });
       function render(gl) {
         gl.clear(gl.COLOR_BUFFER_BIT);
-        let primitiveType = gl.TRIANGLE_STRIP;
-        if (positions.length > 0) {
-          gl.drawArrays(primitiveType, 0, positions.length / 2);
-        }
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, positions.length / 6);
       }
+
       render(gl);
     </script>
   </body>
