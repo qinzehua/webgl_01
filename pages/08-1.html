@@ -131,7 +131,7 @@
       function render() {
         xAngle += 1;
         yAngle += 1;
-        zAangle += 1;
+        zAangle += 3;
         //先绕 Y 轴旋转矩阵。
         matrix.rotationY(deg2radians(yAngle), dstMatrix);
         //再绕 X 轴旋转
@@ -139,15 +139,17 @@
           dstMatrix,
           matrix.rotationX(deg2radians(xAngle), tmpYMatrix),
           dstMatrix
-        );
+        ); // 左乘
+        
         //再绕 Z 轴旋转
         matrix.multiply(
           dstMatrix,
           matrix.rotationZ(deg2radians(xAngle), tmpZMatrix),
           dstMatrix
-        );
+        ); // 左乘
+
         //模型投影矩阵。
-        matrix.multiply(projectionMatrix, dstMatrix, dstMatrix);
+        matrix.multiply(projectionMatrix, dstMatrix, dstMatrix); // 左乘
 
         gl.uniformMatrix4fv(u_Matrix, false, dstMatrix);
         gl.clear(gl.COLOR_BUFFER_BIT);
@@ -162,7 +164,7 @@
       var xAngle = 0;
       var yAngle = 0;
       var zAangle = 0;
-      var dstMatrix = matrix.identity();
+      var dstMatrix = matrix.identity(); // 生成单位阵
       var tmpYMatrix = matrix.identity();
       var tmpZMatrix = matrix.identity();
       document.body.addEventListener("click", function () {

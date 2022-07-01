@@ -16,7 +16,7 @@ let CUBE_FACE_INDICES = [
   [0, 3, 5, 4], //左面
   [1, 7, 6, 2], //右面
   [3, 2, 6, 5], //上面
-  [0, 4, 7, 1] //下面
+  [0, 4, 7, 1], //下面
 ];
 function createFace(width, height, depth, color) {
   let zeroX = width / 2;
@@ -31,7 +31,7 @@ function createFace(width, height, depth, color) {
 
     [-zeroX, zeroY, -zeroZ],
     [zeroX, zeroY, -zeroZ],
-    [zeroX, -zeroY, -zeroZ]
+    [zeroX, -zeroY, -zeroZ],
   ];
   let colorInput = [color || [0, 255, 0, 255]];
   let normalInput = [
@@ -40,9 +40,14 @@ function createFace(width, height, depth, color) {
     [-1, 0, 0],
     [1, 0, 0],
     [0, 1, 0],
-    [0, -1, 0]
+    [0, -1, 0],
   ];
-  let texcoordsInput = [[0, 0], [0, 1], [1, 1], [1, 0]];
+  let texcoordsInput = [
+    [0, 0],
+    [0, 1],
+    [1, 1],
+    [1, 0],
+  ];
   let colors = [];
   let positions = [];
   let normals = [];
@@ -68,13 +73,13 @@ function createFace(width, height, depth, color) {
   colors = new Uint8Array(colors);
   normals = new Float32Array(normals);
   texcoords = new Float32Array(texcoords);
-  console.log('texcooords', texcoords);
+  console.log("texcooords", texcoords);
   return {
     positions: positions,
     indices: indices,
     colors: colors,
     normals: normals,
-    texcoords: texcoords
+    texcoords: texcoords,
   };
 }
 function createWing(topWidth, bottomWidth, height, depth) {
@@ -92,7 +97,7 @@ function createWing(topWidth, bottomWidth, height, depth) {
 
     [-zeroXLeft, zeroY, -zeroZ],
     [zeroXLeft, zeroY, -zeroZ],
-    [zeroXRight, -zeroY, -zeroZ]
+    [zeroXRight, -zeroY, -zeroZ],
   ];
   let colorInput = [
     [255, 0, 0, 255],
@@ -100,7 +105,7 @@ function createWing(topWidth, bottomWidth, height, depth) {
     [0, 0, 255, 255],
     [255, 255, 0, 255],
     [0, 255, 255, 255],
-    [255, 0, 255, 255]
+    [255, 0, 255, 255],
   ];
   let normalInput = [
     [0, 0, 1],
@@ -108,9 +113,14 @@ function createWing(topWidth, bottomWidth, height, depth) {
     [-1, 0, 0],
     [1, 0, 0],
     [0, 1, 0],
-    [0, -1, 0]
+    [0, -1, 0],
   ];
-  let texcoordsInput = [[0, 0], [0, 1], [1, 1], [1, 0]];
+  let texcoordsInput = [
+    [0, 0],
+    [0, 1],
+    [1, 1],
+    [1, 0],
+  ];
   let colors = [];
   let positions = [];
   let normals = [];
@@ -136,13 +146,13 @@ function createWing(topWidth, bottomWidth, height, depth) {
   colors = new Uint8Array(colors);
   normals = new Float32Array(normals);
   texcoords = new Float32Array(texcoords);
-  console.log('texcooords', texcoords);
+  console.log("texcooords", texcoords);
   return {
     positions: positions,
     indices: indices,
     colors: colors,
     normals: normals,
-    texcoords: texcoords
+    texcoords: texcoords,
   };
 }
 
@@ -160,7 +170,7 @@ function createCube(width, height, depth) {
 
     [-zeroX, zeroY, -zeroZ],
     [zeroX, zeroY, -zeroZ],
-    [zeroX, -zeroY, -zeroZ]
+    [zeroX, -zeroY, -zeroZ],
   ];
   let colorInput = [
     [255, 0, 0, 255],
@@ -168,7 +178,7 @@ function createCube(width, height, depth) {
     [0, 0, 255, 255],
     [255, 255, 0, 255],
     [0, 255, 255, 255],
-    [255, 0, 255, 255]
+    [255, 0, 255, 255],
   ];
   let normalInput = [
     [0, 0, 1],
@@ -176,9 +186,14 @@ function createCube(width, height, depth) {
     [-1, 0, 0],
     [1, 0, 0],
     [0, 1, 0],
-    [0, -1, 0]
+    [0, -1, 0],
   ];
-  let texcoordsInput = [[0, 0], [0, 1], [1, 1], [1, 0]];
+  let texcoordsInput = [
+    [0, 0],
+    [0, 1],
+    [1, 1],
+    [1, 0],
+  ];
   let colors = [];
   let positions = [];
   let normals = [];
@@ -204,13 +219,13 @@ function createCube(width, height, depth) {
   colors = new Uint8Array(colors);
   normals = new Float32Array(normals);
   texcoords = new Float32Array(texcoords);
-  console.log('texcooords', texcoords);
+  console.log("texcooords", texcoords);
   return {
     positions: positions,
     indices: indices,
     colors: colors,
     normals: normals,
-    texcoords: texcoords
+    texcoords: texcoords,
   };
 }
 function createLongCube(width, height, depth, repeatCount) {
@@ -227,7 +242,7 @@ function createLongCube(width, height, depth, repeatCount) {
 
     [-zeroX, zeroY, -zeroZ],
     [zeroX, zeroY, -zeroZ],
-    [zeroX, -zeroY, -zeroZ]
+    [zeroX, -zeroY, -zeroZ],
   ];
   let colorInput = [
     [255, 10, 40, 255],
@@ -235,7 +250,7 @@ function createLongCube(width, height, depth, repeatCount) {
     [10, 40, 255, 255],
     [255, 255, 10, 255],
     [10, 255, 255, 255],
-    [255, 10, 255, 255]
+    [255, 10, 255, 255],
   ];
   let normalInput = [
     [0, 0, 1],
@@ -243,9 +258,14 @@ function createLongCube(width, height, depth, repeatCount) {
     [-1, 0, 0],
     [1, 0, 0],
     [0, 1, 0],
-    [0, -1, 0]
+    [0, -1, 0],
   ];
-  let texcoordsInput = [[0, 0], [0, 1], [1, 1], [1, 0]];
+  let texcoordsInput = [
+    [0, 0],
+    [0, 1],
+    [1, 1],
+    [1, 0],
+  ];
   let colors = [];
   let positions = [];
   let normals = [];
@@ -293,51 +313,69 @@ function createLongCube(width, height, depth, repeatCount) {
   colors = new Uint8Array(colors);
   normals = new Float32Array(normals);
   texcoords = new Float32Array(texcoords);
-  console.log('texcooords', texcoords);
+  console.log("texcooords", texcoords);
   return {
     positions: positions,
     indices: indices,
     colors: colors,
     normals: normals,
-    texcoords: texcoords
+    texcoords: texcoords,
   };
 }
 function createSphere(radius, divideByYAxis, divideByCircle) {
-  let yUnitAngle = Math.PI / divideByYAxis;
-  let circleUnitAngle = (Math.PI * 2) / divideByCircle;
+  let yUnitAngle = Math.PI / divideByYAxis; // 按纬度把球切成N等份（弧度）
+  let circleUnitAngle = (Math.PI * 2) / divideByCircle; // 按圆周把圆切成M等份（弧度）
   let positions = [];
   let normals = [];
   for (let i = 0; i <= divideByYAxis; i++) {
+    // 0度在+Y的方向, 弧度沿逆时针方向递增（参照左手坐标系）
     let unitY = Math.cos(yUnitAngle * i);
-    let yValue = radius * unitY;
-
+    let yValue = radius * unitY; // 得到当前圆的y坐标
     for (let j = 0; j <= divideByCircle; j++) {
+      // 0度在+X的方向, 弧度沿着逆时针方向递增
+      //  radius * Math.sin(yUnitAngle * i) 得到当前圆的半径
       let unitX = Math.sin(yUnitAngle * i) * Math.cos(circleUnitAngle * j);
       let unitZ = Math.sin(yUnitAngle * i) * Math.sin(circleUnitAngle * j);
-      let xValue = radius * unitX;
-      let zValue = radius * unitZ;
+      let xValue = radius * unitX; // 当前圆的x坐标
+      let zValue = radius * unitZ; // 当前圆的z坐标
       positions.push(xValue, yValue, zValue);
       normals.push(unitX, unitY, unitZ);
     }
   }
 
+  /*
+  positions = [
+    1,2,3, 1,2,3, 1,2,3, 1,2,3, 1,2,3....., 1,2,3, 1,2,3, 
+    1,2,3, 1,2,3, 1,2,3, 1,2,3, 1,2,3....., 1,2,3, 1,2,3,
+    1,2,3, 1,2,3, 1,2,3, 1,2,3, 1,2,3....., 1,2,3, 1,2,3,
+    1,2,3, 1,2,3, 1,2,3, 1,2,3, 1,2,3....., 1,2,3, 1,2,3,
+                                .
+                                .
+                                .
+                                .
+                                .
+    1,2,3, 1,2,3, 1,2,3, 1,2,3, 1,2,3....., 1,2,3, 1,2,3，
+    1,2,3, 1,2,3, 1,2,3, 1,2,3, 1,2,3....., 1,2,3, 1,2,3
+  ]
+  
+  */
   let indices = [];
-  let circleCount = divideByCircle + 1;
+  let circleCount = divideByCircle + 1; // 13
   for (let j = 0; j < divideByCircle; j++) {
     for (let i = 0; i < divideByYAxis; i++) {
-      indices.push(i * circleCount + j);
-      indices.push(i * circleCount + j + 1);
-      indices.push((i + 1) * circleCount + j);
+      indices.push(i * circleCount + j); // 0
+      indices.push(i * circleCount + j + 1); // 1
+      indices.push((i + 1) * circleCount + j); // 13
 
-      indices.push((i + 1) * circleCount + j);
-      indices.push(i * circleCount + j + 1);
-      indices.push((i + 1) * circleCount + j + 1);
+      indices.push((i + 1) * circleCount + j); // 13
+      indices.push(i * circleCount + j + 1); // 1
+      indices.push((i + 1) * circleCount + j + 1); // 14
     }
   }
   return {
     positions: new Float32Array(positions),
     indices: new Uint16Array(indices),
-    normals: new Float32Array(normals)
+    normals: new Float32Array(normals),
   };
 }
 
@@ -359,7 +397,7 @@ function createCone(
   let atanθ = Math.atan2(bottomRadius - topRadius, height);
   let cosAtanθ = Math.cos(atanθ);
   let sinAtanθ = Math.sin(atanθ);
-  let color = bottomColor || {r: 200, g: 200, b: 200, a: 255};
+  let color = bottomColor || { r: 200, g: 200, b: 200, a: 255 };
 
   for (let i = -1; i <= verticalDivide + 1; i++) {
     let currentRadius = 0;
@@ -373,7 +411,7 @@ function createCone(
     }
     let yValue = (height * i) / verticalDivide - height / 2;
     if (i == -1 || i == verticalDivide + 1) {
-      color = bottomColor || {r: 100, g: 100, b: 100, a: 255};
+      color = bottomColor || { r: 100, g: 100, b: 100, a: 255 };
       currentRadius = 0;
       if (i == -1) {
         yValue = -height / 2;
@@ -381,7 +419,7 @@ function createCone(
         yValue = height / 2;
       }
     } else {
-      color = {r: 100, g: 100, b: 100, a: 255};
+      color = { r: 100, g: 100, b: 100, a: 255 };
     }
     for (let j = 0; j <= bottomDivide; j++) {
       let xUnit = Math.sin((j * Math.PI * 2) / bottomDivide);
@@ -423,13 +461,13 @@ function createCone(
 function getElementsCountPerVertex(attribute) {
   let result = 3;
   switch (attribute) {
-    case 'colors':
+    case "colors":
       result = 4;
       break;
-    case 'indices':
+    case "indices":
       result = 1;
       break;
-    case 'texcoords':
+    case "texcoords":
       result = 2;
       break;
   }
@@ -438,10 +476,10 @@ function getElementsCountPerVertex(attribute) {
 function getArrayTypeByAttribName(attribute) {
   let type = Float32Array;
   switch (attribute) {
-    case 'colors':
+    case "colors":
       type = Uint8Array;
       break;
-    case 'indices':
+    case "indices":
       type = Uint16Array;
       break;
   }
@@ -452,8 +490,8 @@ function transformIndicesToUnIndices(vertex) {
   let vertexsCount = indices.length;
   let destVertex = {};
 
-  Object.keys(vertex).forEach(function(attribute) {
-    if (attribute == 'indices') {
+  Object.keys(vertex).forEach(function (attribute) {
+    if (attribute == "indices") {
       return;
     }
     let src = vertex[attribute];

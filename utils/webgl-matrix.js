@@ -231,6 +231,7 @@
     target = target || new Float32Array(16);
     var sin = Math.sin(angle);
     var cos = Math.cos(angle);
+    // 左手坐标系，sin值与右手坐标系相反
     /*
     target = [
       1,0,0,0,
@@ -271,6 +272,7 @@
     var sin = Math.sin(angle);
     var cos = Math.cos(angle);
     // prettier-ignore
+    // 左手坐标系，sin值与右手坐标系相反
     /*
     target = [
       cos,0,-sin,0,
@@ -310,6 +312,8 @@
     target = target || new Float32Array(16);
     var sin = Math.sin(angle);
     var cos = Math.cos(angle);
+
+    // 左手坐标系，sin值与右手坐标系相反
     /*
     target = [
       cos,sin,0,0,
